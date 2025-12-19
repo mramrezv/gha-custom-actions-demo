@@ -8,7 +8,7 @@ inputs:
 outputs:
   uses-cache:
     description: 'Wether cache was used.'
-    value: ${{ steps.install.outputs.cache }}
+    value: ${{ steps.set-output.outputs.uses-cache }}
 runs:
   using: 'composite'
   steps: 
@@ -24,5 +24,5 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
       run: |
         npm ci
-        echo "cache=${{ inputs.caching }}" >> $GITHUB_OUTPUT
+        echo "uses-cache=${{ inputs.caching }}" >> $GITHUB_OUTPUT
       shell: bash
